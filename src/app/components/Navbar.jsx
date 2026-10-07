@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
 import { Link, Button } from "@heroui/react";
 import { signOut, useSession } from "@/lib/auth-client";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
