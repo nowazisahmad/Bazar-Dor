@@ -1,8 +1,20 @@
+import Marquee from "@/components/Marquee";
+import baseUrl from "@/services/baseUrl";
 
-export default function Home() {
+const getProducts = async () => {
+  const res = await fetch(`${baseUrl}/products`);
+  const data = await res.json();
+  return data;
+}
+
+export default async function Home() {
+  
+  const products = await getProducts();
+  const downProducts = products.filter(p => p.trend == 'down');
+  
   return (
-    <div className="text-2xl text-green-500 font-bold justify-center items-center">
-      <h2>Home</h2>
+    <div className="">
+      <Marquee products={products}/>
     </div>
   );
 }

@@ -149,7 +149,7 @@ const SignUp = () => {
           </TextField>
           <Button
             type="submit"
-            className="h-11 w-full rounded-lg bg-[#009b4d] font-semibold text-white shadow-sm hover:bg-[#008943]"
+            className="h-11 w-full rounded-lg bg-green-500 font-semibold text-white shadow-sm"
           >
             অ্যাকাউন্ট তৈরি করুন
           </Button>

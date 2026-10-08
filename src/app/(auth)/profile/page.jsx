@@ -1,103 +1,163 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button, Input, Label } from "@heroui/react";
+import { updateUser, useSession } from "@/lib/auth-client";
+import {
+  Button,
+  Description,
+  FieldError,
+  FieldGroup,
+  Fieldset,
+  Form,
+  Input,
+  Label,
+  TextField,
+  Toast,
+  toast,
+} from "@heroui/react";
 import Image from "next/image";
-import { useSession } from "@/lib/auth-client";
 
 const ProfilePage = () => {
+  const { data: session } = useSession();
 
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  const handleUpdateUser = async (e) => {
+    e.preventDefault();
 
-  const user = session?.user;
+    const formData = new FormData(e.currentTarget);
+    const userData = Object.fromEntries(formData.entries());
 
-  const [name, setName] = useState(user?.name || "");
+    console.log("in the form data", userData);
 
-  useEffect(() => {
-    if (status !== "loading" && !user) {
-      router.replace("/sign-in");
-    }
-  }, [status, user, router]);
+    const resData = await updateUser({
+      name: userData.name,
+    });
 
-  if (status === "loading") {
+    console.log("after submit user profile", resData);
+
+    toast.success("Profile Update Successfully!");
+  };
+  if (!session) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        Loading...
+      <div className="flex min-h-screen items-center justify-center bg-[#f3f7f3]">
+        <p className="text-sm text-red-500">Please login first.</p>
       </div>
     );
   }
 
-  if (!user) {
-    return null;
-  }
+  const user = session.user;
 
   return (
-    <main className="min-h-screen bg-[#f2f7f3] px-4 py-16">
-      <div className="mx-auto max-w-125">
-        <div className="mb-4">
-          <h1 className="text-xl font-bold text-gray-800">
-            আমার প্রোফাইল
-          </h1>
-          <p className="text-xs text-gray-500">
-            আপনার অ্যাকাউন্টের তথ্য এখানে দেখুন।
-          </p>
-        </div>
-        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+    <>
+      <Toast.Provider />
 
-          <div className="flex items-center gap-3">
-            {user.image ? (
-              <Image
-                src={user.image}
-                alt={user.name || "User"}
-                className="h-12 w-12 rounded-full object-cover"
-              />
-            ) : (
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-600 font-semibold text-white">
-                {user.name?.charAt(0)}
+      <div className="min-h-screen bg-[#f3f7f3] px-4 py-16">
+        <div className="mx-auto w-full max-w-107">
+          <div className="mb-5">
+            <h1 className="text-[22px] font-bold text-[#27332b]">
+              আমার প্রোফাইল
+            </h1>
+            <p className="mt-1 text-[12px] text-gray-500">
+              আপনার প্রোফাইলের তথ্য এখানে দেখুন
+            </p>
+          </div>
+          <div className="mb-4 rounded-xl border border-[#e1e8e2] bg-white px-4 py-4 shadow-sm">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#e8eee9]">
+                  {user.image ? (
+                    <Image
+                      src={user.image}
+                      alt={user.name || "User"}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-lg">👤</span>
+                  )}
+                </div>
+                <div>
+                  <h2 className="text-[14px] font-semibold text-[#26332b]">
+                    {user.name}
+                  </h2>
+                  <p className="mt-0.5 text-[11px] text-gray-500">
+                    {user.email}
+                  </p>
+                </div>
               </div>
-            )}
-            <div>
-              <h2 className="text-sm font-semibold">
-                {user.name}
-              </h2>
-              <p className="text-xs text-gray-500">
-                {user.email}
-              </p>
+              <button
+                type="button"
+                className="shrink-0 rounded-md border border-red-300 bg-green-500 px-3 py-1.5 text-[11px] font-medium text-white"
+              >
+                নাম আপডেট
+              </button>
             </div>
           </div>
-        </div>
-        <div className="mt-4 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-          <h2 className="mb-5 text-sm font-semibold">
-            তথ্য
-          </h2>
-          <div className="mb-4">
-            <Label className="mb-1 block text-xs">
-              নাম
-            </Label>
-            <Input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <Label className="mb-1 block text-xs">
-              ইমেইল
-            </Label>
-            <Input
-              value={user.email || ""}
-              isReadOnly
-            />
-          </div>
-          <Button
-            className="w-full bg-green-600 text-white"
-          >
-            আপডেট
-          </Button>
+          <Form className="w-full" onSubmit={handleUpdateUser}>
+            <Fieldset className="rounded-xl border border-[#e1e8e2] bg-white px-4 py-4 shadow-sm">
+              <Fieldset.Legend className="text-[14px] font-bold text-[#26332b]">
+                তথ্য
+              </Fieldset.Legend>
+              <Description className="sr-only">
+                Update your profile information.
+              </Description>
+              <FieldGroup className="mt-5 flex flex-col gap-2">
+                <TextField
+                  isRequired
+                  name="name"
+                  validate={(value) => {
+                    if (value.length < 3) {
+                      return "Name must be at least 3 characters";
+                    }
+                    return null;
+                  }}
+                >
+                  <Label className="mb-1.5 block text-[11px] font-medium text-[#37423a]">
+                    নাম
+                  </Label>
+                  <Input
+                    defaultValue={user.name}
+                    className="
+                      h-9
+                    w-full
+                      rounded-md
+                      border
+                      border-[#dce5de]
+                      bg-white
+                      px-3
+                      text-[12px]
+                      text-[#26332b]
+                      outline-none
+                      transition
+                      placeholder:text-gray-400
+                      focus:border-[#079447]
+                      focus:ring-2
+                      focus:ring-[#079447]/10
+                    "
+                  />
+                  <FieldError className="mt-1 text-[10px] text-red-500" />
+                </TextField>
+              </FieldGroup>
+              <Fieldset.Actions className="mt-2">
+                <Button
+                  type="submit"
+                  className="
+                    h-9
+                    w-full
+                    rounded-md
+                    bg-green-500
+                    px-4
+                    text-[11px]
+                    font-medium
+                    text-white
+                    shadow-sm
+                  "
+                >
+                  আপডেট
+                </Button>
+              </Fieldset.Actions>
+            </Fieldset>
+          </Form>
         </div>
       </div>
-    </main>
+    </>
   );
 };
 
