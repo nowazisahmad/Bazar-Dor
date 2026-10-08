@@ -1,3 +1,4 @@
+import Banner from "@/components/Banner";
 import Marquee from "@/components/Marquee";
 import baseUrl from "@/services/baseUrl";
 
@@ -11,10 +12,13 @@ export default async function Home() {
   
   const products = await getProducts();
   const downProducts = products.filter(p => p.trend == 'down');
-  
+
   return (
-    <div className="">
+    <div>
       <Marquee products={products}/>
+      <div>
+        <Banner/>
+      </div>
     </div>
   );
 }
