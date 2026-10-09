@@ -8,8 +8,8 @@ const Banner = () => {
   });
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 mt-6">
-      <div className="bg-gray-100 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div className="w-full border bg-gray-400 px-4">
+      <div className="bg-gray-100 rounded-2xl bg-gray-400 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex-1 space-y-4 text-center md:text-left">
           <div className="inline-block bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">
             {date}
@@ -23,7 +23,7 @@ const Banner = () => {
           </p>
           <div className="pt-2">
             <Link href="/">
-              <Button></Button>
+              <Button>সব পণ্য দেখুন</Button>
             </Link>
           </div>
         </div>
