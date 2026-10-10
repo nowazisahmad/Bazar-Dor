@@ -29,7 +29,7 @@ export default async function Home() {
       <div>
         <p className="text-2xl font-bold py-5">▲ আজকে দাম বেড়েছে</p>
         <div>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {upProducts.map((product) => (
               <ProductCard key={product.id} product={product}></ProductCard>
             ))}
@@ -39,7 +39,7 @@ export default async function Home() {
       <div>
         <p className="text-2xl font-bold py-5">▼ আজকে দাম কমেছে</p>
         <div>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {downProducts.map((product) => (
               <ProductCard key={product.id} product={product}></ProductCard>
             ))}

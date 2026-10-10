@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { Button } from "@heroui/react";
 import Image from "next/image";
@@ -10,11 +11,29 @@ const emptySubscribe = () => () => {};
 
 const Navbar = ({ categories }) => {
   const { data: session } = useSession();
+
+  const detailsRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (detailsRef.current && !detailsRef.current.contains(event.target)) {
+        detailsRef.current.removeAttribute("open"); 
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []); 
+
   const date = useSyncExternalStore(
     emptySubscribe,
     () => new Date().toLocaleDateString("bn-BD", { dateStyle: "full" }),
     () => "",
   );
+
   const user = session?.user;
   const firstName = user?.name?.split(" ")[0] || "";
   
@@ -53,7 +72,7 @@ const Navbar = ({ categories }) => {
       </div>
       <div>
         {user ? (
-          <details className="relative">
+          <details ref={detailsRef} className="relative">
             <summary className="flex cursor-pointer list-none items-center gap-2 rounded-lg px-2 py-1 hover:bg-gray-100">
               {user.image ? (
                 <Image

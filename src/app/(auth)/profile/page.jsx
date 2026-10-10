@@ -1,6 +1,6 @@
 "use client";
 
-import { updateUser, useSession } from "@/lib/auth-client";
+import { signOut, updateUser, useSession } from "@/lib/auth-client";
 import {
   Button,
   Description,
@@ -35,6 +35,7 @@ const ProfilePage = () => {
 
     toast.success("Profile Update Successfully!");
   };
+
   if (!session) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#f3f7f3]">
@@ -67,6 +68,8 @@ const ProfilePage = () => {
                     <Image
                       src={user.image}
                       alt={user.name || "User"}
+                      width={96}
+                      height={96}
                       className="h-full w-full object-cover"
                     />
                   ) : (
@@ -83,10 +86,10 @@ const ProfilePage = () => {
                 </div>
               </div>
               <button
-                type="button"
-                className="shrink-0 rounded-md border border-red-300 bg-green-500 px-3 py-1.5 text-[11px] font-medium text-white"
+                onClick={() => signOut()}
+                className="block rounded-lg px-3 py-2 text-sm text-red-500 hover:bg-red-50"
               >
-                নাম আপডেট
+                সাইন আউট
               </button>
             </div>
           </div>
@@ -102,6 +105,7 @@ const ProfilePage = () => {
                 <TextField
                   isRequired
                   name="name"
+                  defaultValue={user.name} 
                   validate={(value) => {
                     if (value.length < 3) {
                       return "Name must be at least 3 characters";
@@ -113,10 +117,9 @@ const ProfilePage = () => {
                     নাম
                   </Label>
                   <Input
-                    defaultValue={user.name}
                     className="
                       h-9
-                    w-full
+                      w-full
                       rounded-md
                       border
                       border-[#dce5de]
@@ -127,7 +130,7 @@ const ProfilePage = () => {
                       outline-none
                       transition
                       placeholder:text-gray-400
-                      focus:border-[#079447]
+                      focus:border-green-400
                       focus:ring-2
                       focus:ring-[#079447]/10
                     "
@@ -142,7 +145,7 @@ const ProfilePage = () => {
                     h-9
                     w-full
                     rounded-md
-                    bg-green-500
+                    bg-green-400
                     px-4
                     text-[11px]
                     font-medium
