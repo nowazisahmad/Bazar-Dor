@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
       <div className="flex items-end justify-between mt-auto">
         <div>
           <p className="text-gray-500 text-xs mb-1">আজকের দাম</p>
-          <h4 className="text-gray-900 font-bold text-lg">{product?.today}</h4>
+          <h4 className="text-gray-900 font-bold text-lg">{product?.today} ৳</h4>
         </div>
         <div>
           <span className={`text-xs font-semibold flex items-center gap-1 ${product.change.dir === "up" ? "text-red-500" : "text-green-500"}`}>
