@@ -46,9 +46,11 @@ export default async function Home() {
           </div>
         </div>
       </div>
-        <div>
-          <AllProducts/>
-        </div>
+      <div>
+        <p className="text-2xl font-bold py-5">সব পণ্য</p>
+        <p className="text-semibold text-gray-500">মোট ৩৩ টি পণ্য দেখানো হচ্ছে</p>
+        <AllProducts />
+      </div>
     </div>
   );
 }

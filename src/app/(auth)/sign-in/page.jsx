@@ -60,18 +60,13 @@ const SignIn = () => {
       </div>
       {/* Card */}
       <div className="mx-auto w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-7">
-        <Form
-          className="flex w-full flex-col gap-5"
-          onSubmit={onSubmit}
-        >
+        <Form className="flex w-full flex-col gap-5" onSubmit={onSubmit}>
           <TextField
             isRequired
             name="email"
             type="email"
             validate={(value) => {
-              if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-              ) {
+              if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
                 return "Please enter a valid email address";
               }
               return null;
@@ -116,9 +111,9 @@ const SignIn = () => {
             </Description>
             <FieldError />
           </TextField>
-          <Button
+            <Button
             type="submit"
-            className="h-11 w-full rounded-lg bg-green-500 font-semibold text-white shadow-sm"
+            className="w-full bg-green-400 text-white"
           >
             সাইন ইন
           </Button>
@@ -133,9 +128,7 @@ const SignIn = () => {
             variant="bordered"
             className="h-11 w-full rounded-lg border-gray-200 bg-white text-sm font-medium text-gray-700"
           >
-            <span className="mr-2 text-base font-bold text-[#4285F4]">
-              G
-            </span>
+            <span className="mr-2 text-base font-bold text-[#4285F4]">G</span>
             Google দিয়ে লগইন করুন
           </Button>
           <Button
@@ -144,20 +137,9 @@ const SignIn = () => {
             variant="bordered"
             className="h-11 w-full rounded-lg border-gray-200 bg-white text-sm font-medium text-gray-700"
           >
-            <span className="mr-2 text-base font-bold text-black">
-              ◉
-            </span>
+            <span className="mr-2 text-base font-bold text-black">◉</span>
             GitHub দিয়ে লগইন করুন
           </Button>
-          <div className="text-center text-sm text-gray-500">
-            পাসওয়ার্ড ভুলে গেছেন?{" "}
-            <Link
-              href="/forget-password"
-              className="font-medium text-[#009b4d] hover:underline"
-            >
-              পাসওয়ার্ড রিসেট করুন
-            </Link>
-          </div>
         </Form>
       </div>
       <p className="mt-7 text-center text-xs text-gray-400">

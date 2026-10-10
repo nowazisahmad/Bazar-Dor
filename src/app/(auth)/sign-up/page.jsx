@@ -9,6 +9,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
 
 const SignUp = () => {
   const onSubmit = async (e) => {
@@ -42,10 +43,7 @@ const SignUp = () => {
         </p>
       </div>
       <div className="mx-auto w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-sm md:p-7">
-        <Form
-          className="flex w-full flex-col gap-5"
-          onSubmit={onSubmit}
-        >
+        <Form className="flex w-full flex-col gap-5" onSubmit={onSubmit}>
           <TextField
             isRequired
             name="name"
@@ -71,9 +69,7 @@ const SignUp = () => {
             name="email"
             type="email"
             validate={(value) => {
-              if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-              ) {
+              if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
                 return "Please enter a valid email address";
               }
               return null;
@@ -147,10 +143,7 @@ const SignUp = () => {
             />
             <FieldError />
           </TextField>
-          <Button
-            type="submit"
-            className="h-11 w-full rounded-lg bg-green-500 font-semibold text-white shadow-sm"
-          >
+          <Button type="submit" className="w-full bg-green-400 text-white">
             অ্যাকাউন্ট তৈরি করুন
           </Button>
           <div className="flex items-center gap-3">
@@ -178,7 +171,7 @@ const SignUp = () => {
             অ্যাকাউন্ট আছে?{" "}
             <a
               href="/sign-in"
-              className="font-medium text-[#009b4d] hover:underline"
+              className="font-medium text-green-400 hover:underline"
             >
               সাইন ইন করুন
             </a>

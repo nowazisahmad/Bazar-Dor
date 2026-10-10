@@ -24,12 +24,12 @@ const Navbar = ({ categories }) => {
         <Image
           src="/logo-icon.png"
           alt="বাজার দর"
-          width={36}
-          height={36}
+          width={25}
+          height={25}
           priority
         />
         <div className="flex flex-col">
-          <span className="text-lg font-bold leading-tight text-green-600">
+          <span className="text-2xl font-bold leading-tight text-green-400">
             বাজার দর
           </span>
           <span className="text-[10px] leading-tight text-neutral-500">
@@ -43,7 +43,7 @@ const Navbar = ({ categories }) => {
             <li key={cat.id} className="list-none">
               <Link 
                 href={`/category/${cat.slug}`} 
-                className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-green-600 transition-colors"
+                className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-green-400 transition-colors"
               >
                 <span>{cat.icon}</span>
                 <span>{cat.nameBn}</span>
@@ -64,7 +64,7 @@ const Navbar = ({ categories }) => {
                   className="h-8 w-8 rounded-full bg-green-400 object-cover"
                 />
               ) : (
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-400 text-sm font-bold text-white">
                   {firstName.charAt(0).toUpperCase()}
                 </div>
               )}
@@ -95,10 +95,10 @@ const Navbar = ({ categories }) => {
         ) : (
           <div className="flex items-center gap-2">
             <Link href="/sign-in">
-              <Button>সাইন ইন</Button>
+              <Button className="bg-green-400 text-white">সাইন ইন</Button>
             </Link>
             <Link href="/sign-up">
-              <Button>সাইন আপ</Button>
+              <Button className="bg-green-400 text-white">সাইন আপ</Button>
             </Link>
           </div>
         )}

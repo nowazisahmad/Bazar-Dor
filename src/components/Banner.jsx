@@ -1,18 +1,13 @@
 "use client";
 
+import { Button } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Banner = () => {
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
-
-  const scrollToProducts = () => {
-    const section = document.getElementById("all-products");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div className="w-full border bg-gray-400 px-4">
@@ -29,12 +24,9 @@ const Banner = () => {
             পণ্যের আজকের দাম এক নজরে দেখে নিন।
           </p>
           <div className="pt-2">
-            <button
-              onClick={scrollToProducts}
-              className="border rounded-[7px] text-white font-bold bg-green-400 h-10 w-30 p-2"
-            >
-              সব পণ্য দেখুন
-            </button>
+            <Link href="#all-products">
+              <Button className="bg-green-400 text-white">সব পণ্য দেখুন</Button>
+            </Link>
           </div>
         </div>
         <div className="shrink-0">

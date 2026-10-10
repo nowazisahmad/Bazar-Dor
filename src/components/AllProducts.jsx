@@ -12,8 +12,6 @@ const AllProducts = async () => {
 
   return (
     <div>
-      <p className="text-2xl font-bold py-5">সব পণ্য</p>
-      <p className="text-semibold text-gray-500">মোট ৩৩ টি পণ্য দেখানো হচ্ছে</p>
       <div id="all-proucts" className="grid grid-cols-3 gap-5">
         {products.map((product) => (
           <ProductCard key={product.id} product={product}></ProductCard>
