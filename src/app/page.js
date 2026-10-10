@@ -1,3 +1,4 @@
+import AllProducts from "@/components/AllProducts";
 import Banner from "@/components/Banner";
 import Marquee from "@/components/Marquee";
 import ProductCard from "@/components/ProductCard";
@@ -45,17 +46,9 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div>
-        <p className="text-2xl font-bold py-5">সব পণ্য</p>
-        <p className="text-semibold text-gray-500">মোট ৩৩ টি পণ্য দেখানো হচ্ছে</p>
         <div>
-          <div className="grid grid-cols-3 gap-5">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product}></ProductCard>
-            ))}
-          </div>
+          <AllProducts/>
         </div>
-      </div>
     </div>
   );
 }
