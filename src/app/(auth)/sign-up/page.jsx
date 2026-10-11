@@ -1,6 +1,6 @@
 "use client";
 
-import { signUp, signIn } from "@/lib/auth-client";
+import { signUp, signIn, signOut } from "@/lib/auth-client";
 import { Icon } from "@iconify/react";
 import {
   Button,
@@ -12,8 +12,11 @@ import {
   toast, 
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
+  const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -26,17 +29,21 @@ const SignUp = () => {
       name: data.name,
       email: data.email,
       password: data.password,
-      callbackURL: "/",
     });
 
     if (error) {
-      toast.danger(error.message || "সাইন আপ করতে সমস্যা হয়েছে!");
-    } else {
-      toast.success("সফলভাবে অ্যাকাউন্ট তৈরি হয়েছে!");
-    }
+    toast.danger(error.message || "সাইন আপ করতে সমস্যা হয়েছে!");
+  } else {
+    await signOut(); 
+
+    toast.success("সফলভাবে অ্যাকাউন্ট তৈরি হয়েছে! এখন লগইন করুন।");
     
-    console.log(signUpData, error);
-  };
+    setTimeout(() => {
+      router.push("/sign-in");
+      router.refresh(); 
+    }, 1500); 
+  }
+};
 
   const handleGoogleLogin = async () => {
     try {

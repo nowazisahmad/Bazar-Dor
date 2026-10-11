@@ -56,7 +56,7 @@ const Navbar = ({ categories }) => {
           </span>
         </div>
       </Link>
-      <div className="flex items-center gap-4 overflow-x-auto mx-4">
+      <div className="hidden md:flex items-center gap-4 overflow-x-auto mx-4">
         {Array.isArray(categories) &&
           categories.map((cat) => (
             <li key={cat.id} className="list-none">

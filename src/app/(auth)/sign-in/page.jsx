@@ -12,8 +12,11 @@ import {
   toast, 
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignIn = () => {
+  const router = useRouter();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -32,9 +35,12 @@ const SignIn = () => {
       toast.danger(error.message || "লগইন করতে সমস্যা হয়েছে!");
     } else {
       toast.success("সফলভাবে লগইন হয়েছে!");
+      
+      setTimeout(() => {
+        router.push("/");
+        router.refresh(); 
+      }, 1000);
     }
-    
-    console.log(signInData, error);
   };
 
   const handleGoogleLogin = async () => {

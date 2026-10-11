@@ -4,15 +4,17 @@ const ProductCard = ({ product }) => {
   return (
     <Link href={`/products/${product.id}`}>
       <div className="bg-white rounded-2xl border border-gray-200 p-4 flex flex-col h-full">
-      <div className="flex flex-row items-start mb-5">
-        <span role="img" aria-label={product?.nameBn} className="text-3xl mb-2">
-          {product?.categoryIcon}
-        </span>
-        <div>
-            <p className="text-gray-700 font-medium text-sm">{product?.nameBn}</p>
-            <p className="text-gray-400 text-xs mt-0.5">{product?.unit}</p>
-        </div>
-      </div>
+      <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-3xl">
+              {product.image}
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-800">{product.nameBn}</h1>
+              <p className="text-gray-500 text-sm mt-1">
+                প্রতি {product.unit}
+              </p>
+            </div>
+          </div>
       <div className="flex items-end justify-between mt-auto">
         <div>
           <p className="text-gray-500 text-xs mb-1">আজকের দাম</p>

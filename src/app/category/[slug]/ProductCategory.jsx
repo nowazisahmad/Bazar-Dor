@@ -25,9 +25,13 @@ const ProductCategory = ({ products, slug }) => {
     <div className="bg-gray-50 min-h-screen p-4 md:p-8 font-sans">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-lg p-4 mb-6 shadow-sm border border-gray-100">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-2xl">{categoryIcon}</span>
-            <p className="text-xl font-bold text-gray-800">{categoryName}</p>
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-3xl">
+              {categoryIcon}
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-800">{categoryName}</h1>
+            </div>
           </div>
           <h3 className="text-sm text-gray-600">
             {products?.length || 0} টি পণ্যের আজকের দাম ও পরিবর্তন
