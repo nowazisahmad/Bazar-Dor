@@ -2,12 +2,24 @@
 
 import { Button } from "@heroui/react";
 import Image from "next/image";
-import Link from "next/link";
 
 const Banner = () => {
   const date = new Date().toLocaleDateString("bn-BD", {
     dateStyle: "full",
   });
+
+  const handleScroll = () => {
+    const target = document.getElementById("all-products");
+
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      console.error("all-products section not found");
+    }
+  };
 
   return (
     <div className="w-full border bg-gray-400 px-4">
@@ -24,9 +36,9 @@ const Banner = () => {
             পণ্যের আজকের দাম এক নজরে দেখে নিন।
           </p>
           <div className="pt-2">
-            <Link href="#all-products">
-              <Button className="bg-green-400 text-white">সব পণ্য দেখুন</Button>
-            </Link>
+            <Button onPress={handleScroll} className="bg-green-400 text-white">
+              সব পণ্য দেখুন
+            </Button>
           </div>
         </div>
         <div className="shrink-0">
